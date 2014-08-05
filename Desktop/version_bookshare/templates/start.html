@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+{% block user %} {{userperson}} {% endblock %}
+	{% block body %}
+		<style>
+			.viewerCanvas{
+				display:block;
+				background:white;
+				padding:10px;
+				box-shadow:0px 0px 10px rgba(0,0,0,0.4);
+				margin:100px 50px;
+				font-size:14px;
+				
+			}
+			
+			.desc{
+				position: relative;
+				float:right;
+				right:40%;
+				width:600px;
+			}
+			.button{
+				position:relative;
+				float:right;
+				left:30%;
+				
+			}
+			.thumbnail{
+				max-width:150px;
+				margin:0 auto;
+			}
+			#des{
+				height:100px;
+				margin:10px;
+				
+			}
+
+			
+			
+		</style>
+		
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    	<script src="https://www.google.com/jsapi"></script>
+		<script>
+		var bookInfo={};
+		$(document).ready(function(){
+			//on click of add button whose parent element is searchDisplay(singular parent not dynamically generated)
+			$("#searchDisplay #add").on("click",function(){
+				var space=$(this).parentsUntil(".viewerCanvas");
+				var description=space.children();
+				var image=space.siblings();
+				var bookTitle=description[1].innerText;
+				var bookAuthor=description[2].innerText;
+				var image_url=image[0].src;
+				bookInfo[bookTitle]=[bookAuthor,image_url];
+				var add_temp="<li class='span2' ><article class='thumbnail' style='margin:0 auto;text-align:center;'><img src='"+image_url+"' height='100' width='100'>"+bookTitle+"</article></li>";
+				$('#addDisplay').css({'visibility':'visible'});
+				$('#addDisplay .thumbnails').append(add_temp);
+				return false;	
+			});
+			$('.thumbnails').scroll(function(){
+
+			});
+			
+			$('#sub').click(function(){
+				$('#addDisplay .thumbnails').empty();
+				console.log(bookInfo);
+				$.ajax({
+					url: "/start",
+					type:'POST',
+					data: {
+						postvar:JSON.stringify(bookInfo)
+					},
+					success:function(){
+						$('#addDisplay').append('<p style="color:red;">The submit request was sucessful</p>');
+
+					}
+
+				});
+				
+				return false;
+			});
+		});
+				
+
+		</script>
+
+		
+				<div class='well'> Ahoy, {{ userperson }}
+				<legend>Start Off with two simple steps !</legend>
+				<p> <b>Enter the books you have and books you want.</b></p></div>
+		
+		<form method="post">
+			<center><label> Add the books to your inventory <input type="search" id='search' class="form-control" name='field-keywords'>
+			<input type="hidden" name="book" value="search">
+			<button type="submit" name="searchbutton" class='btn btn-default'> Search </button></center>
+		</form>
+		<style>
+			
+		</style>
+		
+		<div id="addDisplay" class="row-fluid" style="visibility:hidden;">
+			
+			<ul class="thumbnails" style="width:100%;overflow:auto;">
+				<!- added book element goes here -!>
+
+
+			</ul>
+
+			<legend><button id="sub"type="submit" name="submit" class="btn btn-primary">Submit</button></legend>
+			
+		</div>
+	
+	<div id="searchDisplay">
+		{% for eachbook in items %}
+		<div class="viewerCanvas">
+
+			<img id="thumbnail" src=" {{eachbook[2]}}">
+			
+			<span class="desc">
+				<h4>{{eachbook[0]}}</h4>
+				<h5>{{eachbook[1]}}</h5>
+				<weak id="des">{{eachbook[3]}}</weak>
+				<div class="button">
+					<button id='add to inventory' class="btn btn-primary" type="button"> Add to Wishlist</button>
+					<button id='add to wishlist' class="btn btn-primary" type="button"> Add to Inventory</button>
+				</div>
+				</span>
+		</div>
+		{% endfor %}
+	</div>
+		<hr>
+
+	
+		
+	{% endblock %}
