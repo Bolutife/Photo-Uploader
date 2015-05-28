@@ -1,0 +1,15 @@
+<Alloy>
+	<Window id = "photosWindow" backgroundColor="white">	
+		<LeftNavButton platform=ios>
+        	<Button title="Logout" id = "logoutButton" />
+        </LeftNavButton>
+        <RightNavButton platform=ios>
+        	<Button title="Add Photo" id = "addPhotoButton" />
+        </RightNavButton>
+        <Label id="titleLabel" text="Photos"></Label>
+	</Window>
+</Alloy>
+
+
+
+   

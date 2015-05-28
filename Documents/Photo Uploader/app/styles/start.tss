@@ -1,0 +1,25 @@
+"#baseWindow":{
+	width: Ti.UI.FILL,
+	height:Ti.UI.FILL,
+	tabBarHidden: true,
+	navBarHidden: true,
+	backgroundColor: "white",
+	layout: "vertical"
+}
+
+"#titleLabel":{
+	top: 50,
+	width: Ti.UI.FILL,
+	height:50,
+	textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+	
+}
+
+"#loginButton":{
+	top: 50,
+	width: 250,
+	height: 50,
+	backgroundColor: "blue",
+	color: "white"
+	
+}

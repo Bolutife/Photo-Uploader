@@ -1,0 +1,6 @@
+<Alloy>
+	<Window id="baseWindow">
+		<Label id="titleLabel" text="Photo Uploader"></Label>
+		<Button id = "loginButton" title="Login"></Button>
+	</Window>
+</Alloy>

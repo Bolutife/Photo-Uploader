@@ -1,0 +1,10 @@
+<Alloy>
+	<TabGroup id = "tabGroup" barColor = "white" activeTabBackgroundColor="blue">
+		<Tab id = "photosTab" title="Photos">
+			<Require id="photosController" src="photos"></Require>
+		</Tab>
+		<Tab id = "friendsTab" title = "Friends">
+			<Require id="friendsController" src="friends"></Require>
+		</Tab>
+	</TabGroup>
+</Alloy>
